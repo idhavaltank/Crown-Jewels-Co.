@@ -95,7 +95,7 @@ Crafted by an experienced team with modern best practices, this project delivers
 
 ```bash
 git clone https://github.com/idhavaltank/Crown-Jewels-Co.
-cd crown-jewels-co
+cd Crown-Jewels-Co.
 npm install
 # or
 yarn install
