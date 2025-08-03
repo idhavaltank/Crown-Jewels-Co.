@@ -1,0 +1,16 @@
+/* product card css start ==== */
+
+.hover\:shadow-lg:hover {
+  box-shadow: 0 10px 15px rgba(30, 41, 59, 0.15);
+  transition: box-shadow 0.2s ease;
+}
+
+.h-52 {
+  height: 13rem;
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+/* product card css end ==== */

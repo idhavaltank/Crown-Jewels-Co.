@@ -1,0 +1,31 @@
+/* feedback toast css start ==== */
+
+.bg-success {
+  background-color: var(--color-success);
+}
+
+.bg-error {
+  background-color: var(--color-error);
+}
+
+.text-background {
+  color: var(--color-background-inverted);
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.rounded {
+  border-radius: 0.375rem;
+}
+
+.shadow {
+  box-shadow: 0 2px 18px rgba(30, 41, 59, 0.06);
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+/* feedback toast css end ==== */

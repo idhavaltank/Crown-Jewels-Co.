@@ -1,0 +1,46 @@
+/* cart badge css start ==== */
+
+.relative {
+  position: relative;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.text-background {
+  color: var(--color-background-inverted);
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+/* cart badge css end ==== */

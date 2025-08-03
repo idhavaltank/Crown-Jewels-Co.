@@ -1,0 +1,444 @@
+/* Hero Section */
+.hero-section {
+  position: relative;
+  color: #bfa35b;
+  text-align: center;
+  padding: 6rem 2rem 8rem;
+  overflow: hidden;
+  width: 100%;
+  background-color: #21314d;
+}
+
+.hero-bg {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  max-height: 650px;
+  object-fit: cover;
+  opacity: 0.3;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-section h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 0.6);
+  margin-bottom: 0.4rem;
+  font-family: "Playfair Display", serif;
+}
+
+.hero-section p {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  font-family: "Georgia", serif;
+}
+
+.cta-gold {
+  background-color: #bfa35b;
+  color: #131b2f;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 0.8rem 3rem;
+  border-radius: 30px;
+  box-shadow: 0 4px 7px rgb(191 163 91 / 0.6);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.cta-gold:hover {
+  background-color: #364c78;
+  color: #bfa35b;
+  box-shadow: 0 6px 10px rgb(54 76 120 / 0.7);
+}
+
+.gold-glitter {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 215, 0, 0.3),
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.25;
+  z-index: 0;
+}
+
+/* Brand Legacy Section */
+.brand-legacy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  background-color: #1a2537;
+  padding: 4rem 2rem;
+  color: #bfa35b;
+  justify-content: center;
+  align-items: center;
+}
+
+.legacy-img img {
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+  max-height: 360px;
+  object-fit: cover;
+}
+
+.legacy-text {
+  max-width: 600px;
+}
+
+.legacy-text h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 3px rgb(0 0 0 / 0.7);
+}
+
+.legacy-text p {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 1.6rem;
+  line-height: 1.5;
+  color: #bfa35b;
+}
+
+.cta-link {
+  color: #bfa35b;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.cta-link:hover {
+  color: #364c78;
+}
+
+/* Royal Collections */
+.royal-collections {
+  background: linear-gradient(45deg, #21314d, #2a3a58);
+  padding: 5rem 2rem;
+  color: #bfa35b;
+  text-align: center;
+  width: 100%;
+}
+
+.royal-collections h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.8rem;
+  margin-bottom: 2rem;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.carousel {
+  display: flex;
+  justify-content: space-around;
+  overflow-x: auto;
+  padding: 1rem 0rem;
+}
+
+.carousel img {
+  height: 170px;
+  border-radius: 15px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.carousel img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 15px rgba(255, 215, 0, 0.8);
+}
+
+.collection-desc {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #bfa35b;
+}
+
+/* Signature Pieces */
+.signature-pieces {
+  background-color: #131b2f;
+  padding: 4rem 2rem;
+  color: #bfa35b;
+  text-align: center;
+}
+
+.signature-pieces h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.6rem;
+  margin-bottom: 3rem;
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 4px #000000cc;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-card {
+  background-color: #2a3a58;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(191, 163, 91, 0.85);
+}
+
+.product-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 1rem 1.5rem 2rem;
+  color: #bfa35b;
+  text-align: left;
+}
+
+.product-info h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+  font-family: "Georgia", serif;
+}
+
+.product-price {
+  display: block;
+  color: #ffda6a;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.5px;
+}
+
+.product-info p {
+  font-size: 1rem;
+  font-style: italic;
+  margin-bottom: 1.2rem;
+}
+
+.prod-details {
+  display: inline-block;
+  background-color: #bfa35b;
+  color: #131b2f;
+  padding: 0.6rem 1.6rem;
+  border-radius: 25px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.prod-details:hover {
+  background-color: #364c78;
+  color: #bfa35b;
+}
+
+/* Why Choose Us */
+
+.why-choose-us {
+  text-align: center;
+  background: linear-gradient(45deg, #2a3a58, #21314d);
+  padding: 4rem 2rem 6rem;
+  color: #bfa35b;
+  margin-bottom: 4rem;
+}
+
+.why-choose-us h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.6rem;
+  margin-bottom: 2.5rem;
+  letter-spacing: 1.2px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.icons-row {
+  display: flex;
+  justify-content: center;
+  gap: 2.8rem;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.icons-row > div {
+  flex: 1 0 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #ffda6a;
+}
+
+.icons-row span {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.7));
+}
+
+/* Royal Moments (Testimonials) */
+
+.royal-moments {
+  background-color: #1a2537;
+  color: #bfa35b;
+  padding: 5rem 1.2rem 6rem;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.royal-moments h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.8rem;
+  margin-bottom: 3rem;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.testimonial-carousel {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  gap: 2.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.testimonial-card {
+  display: flex;
+  background-color: #2a3a58;
+  border-radius: 15px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 6px 15px rgb(0 0 0 / 0.5);
+  color: #ffda6a;
+}
+
+.testimonial-card img {
+  width: 40%;
+  height: 360px;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.testimonial-card blockquote {
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  margin: 0;
+  color: #f0d878;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.testimonial-card footer {
+  margin-top: 0.8rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #bfa35b;
+  text-align: right;
+}
+
+/* Newsletter & CTA */
+
+.newsletter-cta {
+  background: url("/marble-bg.jpg") center center/cover no-repeat;
+  padding: 4rem 1.5rem 6rem;
+  color: #bfa35b;
+  text-align: center;
+  width: 100%;
+}
+
+.newsletter-box {
+  background: rgba(33, 49, 77, 0.8);
+  max-width: 575px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgb(191 163 91 / 0.8);
+}
+
+.newsletter-box h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.4rem;
+  margin-bottom: 0.8rem;
+  letter-spacing: 1.4px;
+}
+
+.newsletter-box p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 1rem;
+}
+
+.newsletter-form input[type="email"] {
+  flex: 1;
+  padding: 0.9rem 1.2rem;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.1rem;
+}
+
+.newsletter-form button {
+  background-color: #bfa35b;
+  border: none;
+  color: #131b2f;
+  font-weight: 700;
+  padding: 0.9rem 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.15rem;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background-color: #364c78;
+  color: #bfa35b;
+}

@@ -1,0 +1,515 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* base css start ==== */
+
+/* CSS Variables for colors, fonts, etc. */
+
+:root {
+  --background: #21314d;
+  --font-sans: "Arial", "Helvetica", sans-serif;
+  --foreground: #f4f6fb; /* softer light text on dark bg */
+  --color-text: #bfa35b; /* gold for highlights or special text */
+
+  --color-background: #21314d; /* dark_blue */
+  --color-card: #2a3a58; /* dark_gray_blue */
+  --color-text: #bfa35b; /* gold */
+  --color-error: #bfa35b; /* gold (or add a red if you prefer) */
+  --color-cta: #364c78; /* medium_blue */
+  --color-primary: #21314d; /* dark_blue */
+  --color-background-inverted: #ffffff;
+  --color-secondary: #506b9c; /* light_blue */
+  --color-highlight: #bfa35b; /* gold */
+  --color-success: #506b9c; /* light_blue */
+  --color-border: #364c78; /* medium_blue */
+  --color-muted: #2a3a58; /* dark_gray_blue */
+
+  --color-product-price: #bfa35b; /* gold */
+  --color-product-name: var(--color-text);
+  --color-product-description: #506b9c; /* light_blue (optional) */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #131b2f; /* slightly darker for dark mode */
+    --foreground: #bfa35b;
+
+    --color-background: #131b2f;
+    --color-card: #1a2537;
+    --color-text: #bfa35b;
+    --color-error: #bfa35b;
+    --color-cta: #364c78;
+    --color-primary: #21314d;
+    --color-background-inverted: #21314d;
+    --color-secondary: #506b9c;
+    --color-highlight: #bfa35b;
+    --color-success: #506b9c;
+    --color-border: #364c78;
+    --color-muted: #2a3a58;
+
+    --color-product-price: #bfa35b;
+    --color-product-name: var(--color-text);
+    --color-product-description: #506b9c;
+  }
+}
+
+/* General base utilities */
+
+/* Body */
+body {
+  background-color: var(--background); /* dark blue */
+  color: var(--foreground); /* lighter text for readability */
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Root styles and color palette */
+.root {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer {
+  background: var(--color-card);
+  color: var(--color-product-price);
+  text-align: center;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-card);
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logo {
+  color: var(--color-text);
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navLink {
+  color: var(--color-secondary);
+  text-decoration: none;
+  margin: 0 1.2rem;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.navLink:hover {
+  color: var(--color-highlight);
+}
+
+.iconGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon {
+  color: var(--color-text);
+  padding: 0.4rem;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.icon:hover {
+  background: var(--color-cta);
+}
+
+/* Footer */
+.footer-nav {
+  margin-bottom: 0.8rem;
+}
+.footer-nav a {
+  color: #bfa35b;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.25s ease;
+}
+.footer-nav a:hover {
+  color: #364c78;
+}
+.footer-social a {
+  font-size: 1.3rem;
+  margin-left: 1rem;
+  color: #bfa35b;
+  transition: color 0.3s ease;
+}
+.footer-social a:hover {
+  color: #364c78;
+}
+
+.bg-card {
+  background-color: var(--color-card);
+}
+
+.border {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.border-border {
+  border-color: var(--color-border);
+}
+
+.rounded-lg {
+  border-radius: 0.5rem; /* 8px */
+}
+
+.rounded {
+  border-radius: 0.375rem; /* 6px */
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+/* Typical text usage */
+.text-text {
+  color: var(--color-text); /* gold or highlight text */
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-12 {
+  margin-top: 3rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-20 {
+  width: 5rem;
+}
+
+.max-w-3xl {
+  max-width: 48rem;
+}
+
+.max-w-5xl {
+  max-width: 64rem;
+}
+
+.max-w-7xl {
+  max-width: 80rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.text-muted {
+  color: var(--color-muted);
+}
+
+.text-cta {
+  color: var(--color-cta);
+  text-decoration: none;
+  cursor: pointer;
+  transition: text-decoration 0.2s ease-in-out;
+}
+
+.text-cta:hover {
+  text-decoration: underline;
+}
+
+.bg-background {
+  background-color: var(--color-background);
+}
+
+.text-background {
+  color: var(--color-background-inverted); /* white */
+}
+
+.bg-cta {
+  background-color: var(--color-cta);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-error {
+  background-color: var(--color-error);
+}
+
+.bg-success {
+  background-color: var(--color-success);
+}
+
+.bg-muted {
+  background-color: var(--color-muted);
+}
+
+.shadow {
+  box-shadow: 0 2px 18px rgba(30, 41, 59, 0.06);
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.transition {
+  transition-property: background-color, border-color, color, fill, stroke,
+    box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke,
+    box-shadow, transform;
+}
+
+.duration-200 {
+  transition-duration: 200ms;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.space-x-4 {
+  display: flex;
+  gap: 1rem;
+}
+
+.space-x-4 > * + * {
+  margin-left: 1rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.gap-8 {
+  gap: 2rem;
+}
+
+/* Media Queries */
+
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Focus & Interaction */
+
+.focus\:outline-none:focus {
+  outline: none;
+}
+
+.focus\:ring-2:focus {
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.focus\:ring-primary:focus {
+  --tw-ring-color: var(--color-primary);
+}
+
+.focus\:border-primary:focus {
+  border-color: var(--color-primary);
+}
+
+.focus\:ring-highlight:focus {
+  --tw-ring-color: var(--color-highlight);
+}
+
+.focus\:ring-offset-2:focus {
+  box-shadow: 0 0 0 2px var(--color-highlight),
+    0 0 0 4px var(--color-background);
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.hover\:bg-primary:hover {
+  background-color: var(--color-primary);
+  transition: background-color 0.3s ease;
+}
+
+.hover\:bg-rose-600:hover {
+  background-color: #e11d48;
+  transition: background-color 0.3s ease;
+}
+
+.hover\:bg-gray-400:hover {
+  background-color: #9ca3af;
+  transition: background-color 0.3s ease;
+}
+
+.text-highlight {
+  color: var(--color-highlight);
+}
+
+.button,
+.btn {
+  color: var(--color-background-inverted); /* white text */
+  background-color: var(--color-primary); /* dark blue bg */
+  transition: color 0.2s, background 0.2s;
+}
+
+.button:hover,
+.btn:hover {
+  background-color: var(--color-cta); /* medium blue */
+  color: var(--color-highlight); /* gold */
+}
+
+a:hover,
+button:hover,
+.clickable:hover {
+  cursor: pointer;
+}
+/* base css end ==== */

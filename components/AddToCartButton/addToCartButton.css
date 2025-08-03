@@ -1,0 +1,73 @@
+/* add to cart button css start ==== */
+
+:root {
+  --background: #21314d;
+  --font-sans: "Arial", "Helvetica", sans-serif;
+  --foreground: #f4f6fb; /* softer light text on dark bg */
+  --color-text: #bfa35b; /* gold for highlights or special text */
+
+  --color-background: #21314d; /* dark_blue */
+  --color-card: #2a3a58; /* dark_gray_blue */
+  --color-text: #bfa35b; /* gold */
+  --color-error: #bfa35b; /* gold (or add a red if you prefer) */
+  --color-cta: #364c78; /* medium_blue */
+  --color-primary: #21314d; /* dark_blue */
+  --color-background-inverted: #ffffff;
+  --color-secondary: #506b9c; /* light_blue */
+  --color-highlight: #bfa35b; /* gold */
+  --color-success: #506b9c; /* light_blue */
+  --color-border: #364c78; /* medium_blue */
+  --color-muted: #2a3a58; /* dark_gray_blue */
+
+  --color-product-price: #bfa35b; /* gold */
+  --color-product-name: var(--color-text);
+  --color-product-description: #506b9c; /* light_blue (optional) */
+}
+
+.bg-cta {
+  background-color: var(--color-cta);
+  color: var(--color-background-inverted); /* Ensure readable text on CTA background */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hover\:bg-primary:hover {
+  background-color: var(--color-primary);
+  color: var(--color-highlight); /* Change text color on hover for good contrast */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.text-background {
+  color: var(--color-background-inverted);
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.rounded {
+  border-radius: 0.375rem; /* 6px */
+}
+
+.focus\:outline-none:focus {
+  outline: none;
+}
+
+.focus\:ring-2:focus {
+  box-shadow: 0 0 0 2px var(--color-highlight);
+}
+
+.focus\:ring-highlight:focus {
+  --tw-ring-color: var(--color-highlight);
+}
+
+/* add to cart button css end ==== */

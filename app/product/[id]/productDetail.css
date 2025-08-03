@@ -1,0 +1,226 @@
+/* product detail page css start ==== */
+
+.max-w-5xl {
+  max-width: 64rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mt-12 {
+  margin-top: 3rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.md\:flex-row {
+  /* breakpoint: min-width 768px */
+}
+
+@media (min-width: 768px) {
+  .md\:flex-row {
+    flex-direction: row;
+  }
+}
+
+.gap-8 {
+  gap: 2rem;
+}
+
+.h-72 {
+  height: 18rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.md\:w-1\/2 {
+  /* breakpoint: min-width 768px */
+}
+
+@media (min-width: 768px) {
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+/* Root article container */
+.product-detail {
+  font-family: "Georgia", serif;
+  color: #bfa35b; /* gold */
+  background-color: #131b2f; /* dark royal blue */
+}
+
+/* SEO Section */
+.seo-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.seo-description {
+  font-size: 1.1rem;
+  color: #506b9c;
+}
+
+/* Header */
+.product-header {
+  margin-bottom: 2rem;
+}
+
+/* Slug text */
+.slug {
+  letter-spacing: 2px;
+}
+
+/* Description */
+.description {
+  font-style: italic;
+  color: #506b9c;
+  line-height: 1.6;
+}
+
+/* Purchase info */
+.availability {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.text-success {
+  color: #506b9c; /* light blue */
+}
+
+.text-error {
+  color: #bfa35b; /* gold */
+}
+
+/* Price */
+.price-label {
+  color: #bfa35b;
+}
+
+.price-undiscounted {
+  color: #506b9c;
+}
+
+.price-discounted {
+  color: #bfa35b;
+}
+
+/* Gallery */
+.gallery {
+  scrollbar-width: thin;
+  scrollbar-color: #bfa35b transparent;
+}
+
+.gallery::-webkit-scrollbar {
+  height: 8px;
+}
+
+.gallery::-webkit-scrollbar-thumb {
+  background: #bfa35b;
+  border-radius: 4px;
+}
+
+/* Attributes */
+.attributes-grid {
+  max-width: 100%;
+}
+
+.attribute-card {
+  background-color: #2a3a58;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  padding: 1rem;
+  color: #ffda6a;
+}
+
+.attribute-name {
+  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+}
+
+/* Variants */
+.variant-card {
+  background-color: #2a3a58;
+  padding: 1rem 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgb(0 0 0 / 0.5);
+  color: #ffda6a;
+}
+
+.variant-name {
+  font-family: "Georgia", serif;
+}
+
+.sku {
+  color: #506b9c;
+}
+
+.variant-attributes {
+  margin-top: 0.4rem;
+}
+
+.attr-name {
+  color: #506b9c;
+}
+
+.attr-value {
+  background-color: #bfa35b;
+  color: #21314d;
+  padding: 0.1em 0.4em;
+  border-radius: 6px;
+  margin-right: 0.2em;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Category & Type */
+.category-type {
+  letter-spacing: 1.2px;
+}
+
+/* Purchase Availability */
+.purchase-availability p {
+  font-size: 1.1rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .product-header {
+    flex-direction: column;
+  }
+
+  .image-wrapper {
+    height: 320px !important;
+  }
+
+  .variants-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .attributes-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* product detail page css end ==== */
