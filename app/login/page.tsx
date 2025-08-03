@@ -1,6 +1,6 @@
 "use client";
 
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import "./login.css";
@@ -13,24 +13,7 @@ import { PRIVATE_NAVIGATION } from "@/constants";
 import { initialLoginValues } from "./constants";
 import Spinner from "@/components/Icons/Spinner";
 
-export const TOKEN_CREATE = gql`
-  mutation TokenCreate($email: String!, $password: String!) {
-    tokenCreate(email: $email, password: $password) {
-      token
-      user {
-        email
-        isStaff
-        userPermissions {
-          code
-        }
-      }
-      errors {
-        field
-        message
-      }
-    }
-  }
-`;
+import { TOKEN_CREATE } from "@/graphql/mutations";
 
 const LoginPage = () => {
   const { login } = useAuth();
