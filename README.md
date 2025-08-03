@@ -94,7 +94,7 @@ Crafted by an experienced team with modern best practices, this project delivers
 **Installation & Setup:**
 
 ```bash
-git clone [https://github.com/YOURUSERNAME/ecommerce-storefront.git](https://github.com/idhavaltank/Crown-Jewels-Co./edit/main/README.md)
+git clone https://github.com/idhavaltank/Crown-Jewels-Co.
 cd crown-jewels-co
 npm install
 # or
