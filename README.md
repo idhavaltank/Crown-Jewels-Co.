@@ -138,10 +138,4 @@ npm start
 - End-to-end automated testing suite (Cypress/Playwright)
 - Server-driven SEO metadata via dynamic ``
 
-## 🤝 Contact & Credits
-
-**Questions? Issues?**  
-Contact: `your.email@example.com`  
-GitHub: [yourusername](https://github.com/yourusername)
-
 > *This project embodies mature development, thoughtful design, and readiness for both rapid iteration and long-term evolution.*
