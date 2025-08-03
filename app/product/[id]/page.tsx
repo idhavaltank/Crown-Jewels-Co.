@@ -1,32 +1,49 @@
 "use client";
 
+// 1. React and related libraries
+import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import Link from "next/link";
+import Image from "next/image";
+import { useSelector } from "react-redux";
 
+// 2. Styles
 import "./productDetail.css";
 
+// 3. Components
 import AddToCartButton from "@/components/AddToCartButton";
 
+// 4. Redux selectors
 import { getProductByID } from "@/Redux/slices/productsSlice";
 
+// 5. Services / hooks
 import { useGetProductDetail } from "@/services/products.service";
 
+// 6. Constants / config
 import { PRIVATE_NAVIGATION } from "@/constants";
 import { PRODUCT_ATTRIBUTES } from "./constants";
 
+// 7. Types
 import { Media, ProductDetail, Variant } from "./types";
 
 const ProductDetailPage = () => {
+  // 2. Variables / State
+
+  // Get the product ID from URL params
   const { id } = useParams();
+
+  // Access Redux slice for product details by ID
   const productByID = useSelector(getProductByID);
 
+  // Hook to fetch detailed product data
   const { fetchProduct, error, isLoading } = useGetProductDetail();
 
-  const [data, setData] = useState();
+  // Local state to hold detailed product data fetched
+  const [data, setData] = useState<ProductDetail | undefined>(undefined);
 
+  // 4. Functions
+
+  // Fetch product detail by slug from productByID mapping
   const setProductData = async () => {
     if (typeof id === "string") {
       const product = productByID?.[id];
@@ -37,23 +54,30 @@ const ProductDetailPage = () => {
     }
   };
 
+  // 3. useEffect to fetch product data on component mount or id change
   useEffect(() => {
     setProductData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  // 5. Return JSX rendering and conditional UI states
+
+  // Show loading text while fetching
   if (isLoading) {
     return <p className="text-center mt-12">Loading...</p>;
   }
 
+  // Display error message if any error occurred during fetch
   if (error) {
     return <p className="text-center mt-12 text-error">Error: {error}</p>;
   }
 
+  // Show fallback if product data not found (e.g. invalid product id)
   if (!data) {
     return <p className="text-center mt-12">Product not found</p>;
   }
 
+  // Destructure product detail data object
   const product: ProductDetail = data;
   const {
     name,
@@ -63,8 +87,8 @@ const ProductDetailPage = () => {
     seoDescription,
     defaultVariant,
     variants,
-    media,
-    attributes,
+    media = [],
+    attributes = [],
     category,
     productType,
     isAvailableForPurchase,
@@ -72,11 +96,11 @@ const ProductDetailPage = () => {
   } = product;
 
   // Use first media as main image fallback
-  const mainImage = media && media.length > 0 ? media[0] : null;
+  const mainImage: Media | null = media.length > 0 ? media[0] : null;
 
   return (
     <article className="product-detail max-w-7xl mx-auto my-12 p-6 bg-card rounded-lg border border-border shadow-lg">
-      {/* SEO Info */}
+      {/* SEO Information */}
       <section className="seo-info mb-6">
         <h2 className="seo-title text-highlight font-serif tracking-wide">
           {seoTitle || name}
@@ -88,9 +112,9 @@ const ProductDetailPage = () => {
         )}
       </section>
 
-      {/* Header Section */}
+      {/* Header with main image and product info/details */}
       <header className="product-header flex flex-col md:flex-row gap-8">
-        {/* Main Image */}
+        {/* Main product image */}
         {mainImage && (
           <div className="image-wrapper relative w-full md:w-1/2 rounded overflow-hidden shadow-xl">
             <Image
@@ -104,14 +128,14 @@ const ProductDetailPage = () => {
           </div>
         )}
 
-        {/* Basic Info */}
+        {/* Product info: name, slug, pricing, add-to-cart */}
         <div className="product-info flex flex-col flex-1 text-text">
           <h1 className="text-4xl font-bold mb-3 font-serif">{name}</h1>
           <p className="slug uppercase tracking-widest text-secondary mb-4">
             Slug: {slug}
           </p>
 
-          {/* Purchase info & pricing */}
+          {/* Purchase availability and pricing */}
           <div className="purchase-info mb-6">
             <p
               className={`availability mb-2 ${
@@ -158,6 +182,7 @@ const ProductDetailPage = () => {
             )}
           </div>
 
+          {/* Add to Cart button */}
           <AddToCartButton
             productId={product.id}
             name={name}
@@ -166,7 +191,7 @@ const ProductDetailPage = () => {
         </div>
       </header>
 
-      {/* Media Gallery */}
+      {/* Media gallery */}
       <section className="media-gallery mt-12">
         <h3 className="section-title mb-4">Gallery</h3>
         <div className="gallery flex gap-4 overflow-x-auto">
@@ -192,7 +217,7 @@ const ProductDetailPage = () => {
         </div>
       </section>
 
-      {/* Attributes */}
+      {/* Attributes section */}
       <section className="attributes mt-12">
         <h3 className="section-title mb-4">Attributes</h3>
         {attributes.length > 0 ? (
@@ -238,7 +263,7 @@ const ProductDetailPage = () => {
         )}
       </section>
 
-      {/* Variants */}
+      {/* Variants section */}
       <section className="variants mt-12">
         <h3 className="section-title mb-6">Variants</h3>
         {variants.length > 0 ? (
@@ -292,7 +317,7 @@ const ProductDetailPage = () => {
         )}
       </section>
 
-      {/* Category & Product Type */}
+      {/* Category and Product Type */}
       <section className="category-type mt-12 flex flex-wrap gap-8 text-secondary text-sm">
         <div>
           <strong>Category:</strong> {category?.name || "N/A"}
@@ -302,7 +327,7 @@ const ProductDetailPage = () => {
         </div>
       </section>
 
-      {/* Purchase Info */}
+      {/* Purchase Availability Info */}
       <section className="purchase-availability mt-8 text-center">
         <p
           className={`font-semibold ${

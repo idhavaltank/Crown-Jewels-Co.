@@ -1,4 +1,3 @@
-
 const ProfileIcon = () => (
   <svg width="24" height="24" fill="currentColor" aria-label="Profile">
     <circle cx="12" cy="8" r="4" />

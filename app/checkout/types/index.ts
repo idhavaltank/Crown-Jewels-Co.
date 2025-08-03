@@ -14,3 +14,8 @@ export interface fromFieldsType {
   name: keyof AddressType;
   required: boolean;
 }
+
+export interface ToastMessageType  {
+  type: "success" | "error" | "info";
+  text: string;
+};

@@ -1,49 +1,66 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+// 1. React and related libraries
 import { useMutation } from "@apollo/client";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
+// 2. Styles
 import "./checkout.css";
 
-import { useCart } from "../../contexts/CartContext";
+// 3. Contexts
 import { useAuth } from "../../contexts/AuthContext";
+import { useCart } from "../../contexts/CartContext";
 
+// 4. GraphQL queries/mutations
 import { CREATE_ORDER_MUTATION } from "@/graphql/queries";
 
+// 5. Components
+import CartItemRow from "@/components/CartItemRow";
+import FeedBackToast from "@/components/FeedBackToast";
 import FormInput from "@/components/FormInput";
 import OrderButton from "@/components/OrderButton";
-import FeedBackToast from "@/components/FeedBackToast";
 
-import { FORM_FIELDS, initialShippingAddressValues } from "./constants";
-import { AddressType } from "./types";
+// 6. Constants / types
 import { PRIVATE_NAVIGATION, PUBLIC_NAVIGATION } from "@/constants";
-import CartItemRow from "@/components/CartItemRow";
+import { FORM_FIELDS, initialShippingAddressValues } from "./constants";
+import { AddressType, ToastMessageType } from "./types";
 
-type ToastMessageType = {
-  type: "success" | "error" | "info";
-  text: string;
-};
 
 const CheckoutPage = () => {
+  // 2. Variables / state
+
+  // Cart and user auth context data
   const { cartItems, clearCart } = useCart();
   const { token } = useAuth();
+
+  // Next.js router for navigation
   const router = useRouter();
 
+  // Payment method state
   const [paymentMethod, setPaymentMethod] = useState("Credit Card");
+
+  // Shipping address form data state
   const [shippingAddress, setShippingAddress] = useState<AddressType>(
     initialShippingAddressValues
   );
 
+  // Form field validation errors
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
+  // Toast messages for user feedback
   const [toastMessage, setToastMessage] = useState<ToastMessageType | null>(
     null
   );
 
+  // Apollo mutation hook for creating order
   const [createOrder, { loading, error }] = useMutation(CREATE_ORDER_MUTATION);
 
-  // Update input fields and clear specific errors
+  // 3. No useEffect hooks needed in this component
+
+  // 4. Functions
+
+  // Update a single shipping address input field and clear its error if any
   const updateAddressField = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setShippingAddress((prev) => ({ ...prev, [name]: value }));
@@ -55,7 +72,7 @@ const CheckoutPage = () => {
     });
   };
 
-  // Validate required fields and postal code format
+  // Validate required fields and postal code format in the shipping address form
   const validateForm = (): boolean => {
     const errors: Record<string, string> = {};
 
@@ -64,6 +81,7 @@ const CheckoutPage = () => {
       if (required && !val) {
         errors[name] = "This field is required.";
       }
+      // Simple postal code regex validation for US ZIP codes (5 digit or 5+4)
       if (name === "postalCode" && val && !/^\d{5}(-\d{4})?$/.test(val)) {
         errors[name] = "Invalid postal code format.";
       }
@@ -73,10 +91,11 @@ const CheckoutPage = () => {
     return Object.keys(errors).length === 0;
   };
 
-  // Submit order handler
+  // Form submit handler for placing an order
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Check authentication
     if (!token) {
       setToastMessage({
         type: "error",
@@ -86,12 +105,14 @@ const CheckoutPage = () => {
       return;
     }
 
+    // Check if cart is empty
     if (cartItems.length === 0) {
       setToastMessage({ type: "error", text: "Your cart is empty." });
       router.push(PRIVATE_NAVIGATION.PRODUCT.VIEW);
       return;
     }
 
+    // Validate form fields before proceeding
     if (!validateForm()) {
       setToastMessage({
         type: "error",
@@ -101,6 +122,7 @@ const CheckoutPage = () => {
     }
 
     try {
+      // Prepare order input payload
       const input = {
         items: cartItems.map((item) => ({
           productId: item.productId,
@@ -110,6 +132,7 @@ const CheckoutPage = () => {
         paymentMethod,
       };
 
+      // Create order via GraphQL
       const { data } = await createOrder({ variables: { input } });
 
       if (data?.createOrder) {
@@ -117,7 +140,9 @@ const CheckoutPage = () => {
           type: "success",
           text: `Order placed successfully! Order ID: ${data.createOrder.id}`,
         });
-        clearCart();
+        clearCart(); // clear cart after order placed
+
+        // Redirect to product view page after 2 seconds
         setTimeout(() => {
           router.push(PRIVATE_NAVIGATION.PRODUCT.VIEW);
         }, 2000);
@@ -130,9 +155,10 @@ const CheckoutPage = () => {
     }
   };
 
+  // 5. Return JSX
   return (
     <div className="flex flex-col md:flex-row justify-center gap-8 max-w-full my-12 px-4">
-      {/* Order Summary */}
+      {/* Order Summary Section */}
       <section className="flex-1 border rounded-lg p-6 shadow">
         <h2 className="text-2xl font-semibold mb-6">Order Summary</h2>
         <ul>
@@ -152,11 +178,12 @@ const CheckoutPage = () => {
         </ul>
       </section>
 
-      {/* Checkout Form */}
+      {/* Checkout Form Section */}
       <section className="flex-1 bg-card rounded-lg border border-border p-6 shadow max-w-md w-full">
         <h1 className="text-3xl font-semibold text-text mb-6">Checkout</h1>
+
         <form className="space-y-6" onSubmit={handleSubmit} noValidate>
-          {/* Shipping Address */}
+          {/* Shipping Address Inputs */}
           <div>
             <h2 className="text-xl font-semibold text-secondary mb-4">
               Shipping Address
@@ -199,7 +226,7 @@ const CheckoutPage = () => {
             ))}
           </div>
 
-          {/* Payment Method */}
+          {/* Payment Method Selection */}
           <div>
             <h2 className="text-xl font-semibold text-secondary mb-4">
               Payment Method
@@ -217,10 +244,10 @@ const CheckoutPage = () => {
             </select>
           </div>
 
-          {/* Submit Button */}
+          {/* Submit / Order Button */}
           <OrderButton loading={loading} type="submit" />
 
-          {/* Toast Message */}
+          {/* Toast message for feedback */}
           {toastMessage && (
             <FeedBackToast
               type={toastMessage.type}
@@ -229,7 +256,7 @@ const CheckoutPage = () => {
             />
           )}
 
-          {/* GraphQL Error Display */}
+          {/* GraphQL error display (if any, and no toast message currently) */}
           {error && !toastMessage && (
             <p
               className="text-error mt-4 text-center"

@@ -1,19 +1,28 @@
 "use client";
 
+// 1. React and related libraries
 import React, { useEffect, useState } from "react";
 
+// 2. Styles
 import "./products.css";
 
+// 3. Components
 import ProductCard from "@/components/ProductCard";
 
+// 4. Types
 import { Product } from "./types";
 
+// 5. Services / hooks
 import { useGetProducts } from "@/services/products.service";
 
 const ProductsPage = () => {
+  // 2. Variables / state
   const { fetchProducts, error, isLoading } = useGetProducts();
   const [products, setProducts] = useState<Product[]>([]);
 
+  // 4. Functions
+
+  // Load products asynchronously and update state accordingly
   const loadProducts = async () => {
     const { data, error } = await fetchProducts();
     if (data?.length) {
@@ -23,10 +32,14 @@ const ProductsPage = () => {
     }
   };
 
+  // 3. useEffect - to load products on component mount only
   useEffect(() => {
     loadProducts();
+    // disabling linter to avoid warning, as fetchProducts is stable or memoized
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // 5. Return JSX render logic
 
   if (isLoading) {
     return (

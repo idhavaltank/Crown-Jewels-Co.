@@ -1,41 +1,26 @@
 "use client";
 
+// 1. React core libraries
 import React, { createContext, useContext, useEffect, useState } from "react";
+
+// 2. Redux
 import { useDispatch } from "react-redux";
 import { setUser, clearUser } from "@/Redux/slices/userSlice";
 
-interface UserInfo {
-  email: string | null;
-  isStaff: boolean;
-  permissions: string[];
-}
+// 3. Types
+import { AuthContextType, AuthData, UserInfo } from "./types/authContext.types";
 
-interface AuthData {
-  token: string;
-  user: UserInfo;
-}
-
-interface AuthContextType {
-  token: string | null;
-  login: (tokenData: {
-    token: string;
-    user: {
-      email: string | null;
-      isStaff: boolean;
-      userPermissions: { code: string }[];
-    };
-  }) => void;
-  logout: () => void;
-  isLoggedIn: boolean;
-}
-
+// 4. Create AuthContext with undefined default to enforce usage within AuthProvider
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// 5. AuthProvider component providing authentication state and actions
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
+
+  // 2. Local state to store current auth token
   const [token, setToken] = useState<string | null>(null);
 
-  // Load full auth data (token + user) from localStorage on mount
+  // 3. useEffect: On mount, load saved auth data (token + user) from localStorage
   useEffect(() => {
     const savedAuth = localStorage.getItem("authData");
     if (savedAuth) {
@@ -44,22 +29,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
         const newToken = tokenData.token;
         setToken(newToken);
+
         const userInfo: UserInfo = {
           email: tokenData.user.email,
           isStaff: tokenData.user.isStaff,
           permissions: tokenData.user.permissions || [],
         };
+
         dispatch(setUser({ ...userInfo, token: newToken }));
       } catch (err) {
         console.error("Failed to parse auth data from localStorage", err);
-        localStorage.removeItem("authData"); // Clean up corrupt data
+        // Remove corrupt stored data to avoid repeated errors
+        localStorage.removeItem("authData");
       }
     }
   }, [dispatch]);
 
-  // Save full auth data to localStorage when token or user changes
-  // We only save on login/logout so this logic is inside login/logout functions.
-
+  // 4. Function to handle login, saving token and user info
   const login = (tokenData: {
     token: string;
     user: {
@@ -71,6 +57,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const newToken = tokenData.token;
     setToken(newToken);
 
+    // Convert permissions from userPermissions to array of codes
     const userInfo: UserInfo = {
       email: tokenData.user.email,
       isStaff: tokenData.user.isStaff,
@@ -78,20 +65,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const authData: AuthData = { token: newToken, user: userInfo };
+
     // Persist full auth data in localStorage
     localStorage.setItem("authData", JSON.stringify(authData));
-    // Update Redux store
+
+    // Update Redux store user slice
     dispatch(setUser({ ...userInfo, token: newToken }));
   };
 
+  // 5. Function to logout user and clear auth info from state, localStorage, and Redux
   const logout = () => {
     setToken(null);
     dispatch(clearUser());
     localStorage.removeItem("authData");
   };
 
+  // 6. Boolean indicating if the user is considered logged in
   const isLoggedIn = Boolean(token);
 
+  // 7. Provide auth context value to children components
   return (
     <AuthContext.Provider value={{ token, login, logout, isLoggedIn }}>
       {children}
@@ -99,11 +91,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// Custom hook for convenience
+// 8. Custom hook to safely consume the AuthContext
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
+
   if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
+
   return context;
 };

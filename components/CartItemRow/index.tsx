@@ -1,10 +1,19 @@
 "use client";
 
+// 1. React core libraries
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+
+// 2. Helper utilities
 import { isValidImageUrl } from "@/helper";
+
+// 3. Types
 import { CartItemRowPropsType } from "./types";
+
+// 4. Constants
 import { NO_IMAGE_URL } from "@/constants";
+
+// 5. Contexts
 import { useCart } from "@/contexts/CartContext";
 
 const CartItemRow = ({
@@ -13,20 +22,30 @@ const CartItemRow = ({
   thumbnailUrl,
   quantity,
 }: CartItemRowPropsType) => {
+  // 2. Variables / state
+  // Get cart context methods for updating/removing items
   const { removeItem, updateItemQuantity } = useCart();
 
+  // State to track if the product image URL is valid
   const [isImageValid, setIsImageValid] = useState(true);
 
+  // 4. Functions
+
+  // Handle quantity input change, updating cart item quantity
   const handleQuantityChange = (productId: string, quantity: number) => {
     updateItemQuantity({ productId, quantity });
   };
 
+  // Handle removal of item from cart
   const handleRemoveItem = (productId: string) => {
     removeItem(productId);
   };
 
+  // 3. useEffect - validate image url on thumbnail change
   useEffect(() => {
     let isMounted = true;
+
+    // Async image URL validation
     async function validate() {
       if (thumbnailUrl) {
         const valid = await isValidImageUrl({ url: thumbnailUrl });
@@ -35,12 +54,18 @@ const CartItemRow = ({
         setIsImageValid(false);
       }
     }
+
     validate();
+
+    // Cleanup function to avoid state update if unmounted
     return () => {
       isMounted = false;
     };
   }, [thumbnailUrl]);
 
+  // 5. Return JSX
+
+  // Fallback UI if product name unavailable
   if (!name) {
     return (
       <li className="flex items-center justify-between py-4">
@@ -58,6 +83,7 @@ const CartItemRow = ({
     );
   }
 
+  // Normal render for cart item row
   return (
     <li className="flex items-center justify-between py-4 mr-3">
       <div className="flex items-center space-x-4 mr-2">
@@ -73,6 +99,7 @@ const CartItemRow = ({
         </div>
         <p className="text-text font-medium">{name}</p>
       </div>
+
       <div className="flex items-center space-x-4 mr-2">
         <input
           type="number"

@@ -1,6 +1,3 @@
-// LoginIcon.tsx
-import React from "react";
-
 const LoginIcon = () => (
   <svg
     width="24"
