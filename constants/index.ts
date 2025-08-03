@@ -10,6 +10,4 @@ export const PRIVATE_NAVIGATION = {
   PROFILE: { VIEW: "/profile" },
 };
 
-// export const NO_IMAGE_URL = "https://ibb.co/B2njM987";
-export const NO_IMAGE_URL = "/no-image-product.png"
-  // "https://via.placeholder.com/400x300?text=No+Image+Available";
+export const NO_IMAGE_URL = "/no-image-product.png";

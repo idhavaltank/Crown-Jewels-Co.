@@ -1,12 +1,19 @@
 "use client";
 
+// 1. React core library
 import React from "react";
+
+// 2. Types
 import { OrderButtonPropsType } from "./types";
+
+// 3. Components
 import Spinner from "../Icons/Spinner";
 
 const OrderButton = (props: OrderButtonPropsType) => {
+  // 1. Props destructuring with default button type
   const { loading, onClick, type = "button" } = props;
 
+  // 2. Return JSX for button with loading state and accessibility attributes
   return (
     <button
       type={type}

@@ -1,6 +1,3 @@
-// LogoutIcon.tsx
-import React from "react";
-
 const LogoutIcon = () => (
   <svg
     width="24"

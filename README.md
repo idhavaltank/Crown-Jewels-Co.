@@ -1,4 +1,4 @@
-# 🛒 Next.js E-Commerce Crown Jewels Co.
+# 🛒 Crown Jewels Co. - Next.js E-Commerce Platform
 
 Crafted by an experienced team with modern best practices, this project delivers a **highly scalable, performant, and maintainable e-commerce storefront** leveraging Next.js 13 App Router, TypeScript, GraphQL, and an advanced frontend architecture.
 
@@ -8,134 +8,154 @@ Crafted by an experienced team with modern best practices, this project delivers
 
 ## ✨ Key Features & Technical Highlights
 
-- **Next.js 13+ (App Router) & React 18**  
+- **Next.js 13+ (App Router) & React 18**
+
   - Server & Client Components, SSR, CSR: performance-first rendering
-  - Modular `/app` structure for clear, atomic feature boundaries
+  - Modular `/app` structure with clear, atomic feature boundaries
 
-- **TypeScript Throughout**  
-  - Strict typing for safety, scalability, and outstanding IDE support
+- **TypeScript Throughout**
 
-- **State-of-the-Art State Management**  
-  - 🔄 Auth: Redux Toolkit (user/session), persisted to localStorage  
-  - 🛒 Cart: Redux slice with full localStorage sync for cross-session recovery
+  - Strict typing ensures safety, scalability, and superior IDE support
 
-- **GraphQL API Integration (Apollo Client)**  
-  - Decoupled queries & mutations, hooks for all data flows  
-  - Secure, token-based operations (login, product, order)
+- **State-of-the-Art State Management**
 
-- **UI/UX — Designed from Scratch, No Shortcuts**  
-  - Responsive, accessible layouts with Tailwind CSS primitives  
-  - Toast notifications, skeletons, and loading spinners for smooth usability  
-  - Clean table/grid/list presentation with visually pleasing defaults
-  - All forms (checkout, login) feature inline validation and feedback
+  - 🔄 Auth state with Redux Toolkit, persisted via localStorage for session continuity
+  - 🛒 Cart managed by Redux slice with localStorage sync for cross-session recovery
 
-- **Code Quality & Engineering Excellence**  
-  - Strict ESLint, consistent Prettier formatting, atomic components, co-located styles/types
-  - GitHub-quality commit hygiene & documentation
-  - Thoughtful error boundaries and fallback states
+- **GraphQL API Integration (Apollo Client)**
+
+  - Decoupled queries & mutations, custom React hooks for all data flows
+  - Secure, token-based operations including login and order placement
+
+- **UI/UX — Designed From Scratch**
+
+  - Responsive, accessible UI built using Tailwind CSS primitives
+  - Toast notifications, loading spinners, and skeletons ensure smooth usability
+  - Clear, clean layout for tables, grids, and lists with polished defaults
+  - Inline validation and real-time feedback on all forms (checkout, login)
+
+- **Code Quality & Engineering Excellence**
+  - Strict ESLint & Prettier configs for consistent code style
+  - Atomic, reusable components with co-located styles and types
+  - Robust error boundaries and graceful fallback UI
 
 ## 🏗️ Solution Architecture
 
 ### Modular Organization
 
-```plaintext
+```
 /app          # Pages: login, product list/detail, cart, checkout, profile
-/components   # UI primitives: Card, Form, Toast, Buttons, etc.
-/Redux        # All state slices: user, products, cart, etc.
-/graphql      # Apollo Client config, queries & mutations
-/styles       # Tailwind base config & themes
-/contexts     # (If used) Auth and Cart Contexts
+/components   # UI primitives: Card, FormInput, Toast, Buttons, etc.
+/Redux        # All Redux slices: user, products, productDetail, cart
+/graphql      # Apollo Client setup, queries & mutations
+/styles       # Tailwind configuration & theming
+/contexts     # React Contexts for Auth and Cart state
+/services     # API services and GraphQL hooks
+/utils        # Utility functions and helpers
 ```
 
 ### Data and State Flow
 
-- **User/auth and cart state:**  
-  - Synced via Redux Toolkit, with hydration from localStorage on app start for seamless session continuity.
-  - All sensitive actions guarded; cart and user state "just work" across reloads.
+- **User/Auth & Cart State:**  
+  Synchronized with Redux Toolkit, hydrated from localStorage on app load for seamless session continuity. All sensitive actions guarded with appropriate authentication checks.
 
-- **Data fetching:**  
-  - All major product data retrieved server-side (`app/product/page.tsx`, `app/product/[id]/page.tsx`) for optimal SEO and performance.
-  - All mutations (login, order) use isolated, reusable GraphQL hooks.
+- **Data Fetching:**  
+  Product data is fetched server-side for all commerce-critical pages for optimal performance and SEO benefits. Mutations (login, order creation) use isolated, reusable GraphQL hooks.
 
-### UI/UX Matters
+## 🧩 Implemented Functionality
 
-- All critical interactions provide immediate feedback via loading indicators or toast notifications.
-- Forms cannot be submitted improperly; validation and error messages are always clear.
-- App is usable via keyboard, screen readers, and manages focus after key actions.
+|           Page           | Features                                                                                                        |
+| :----------------------: | :-------------------------------------------------------------------------------------------------------------- |
+|        **Login**         | Secure login via Redux + persisted token, inline validation, toast feedback                                     |
+|  **Product List (PLP)**  | Server-side rendered product grid, error/empty states, ready for filters & pagination                           |
+| **Product Detail (PDP)** | Variant selectors, add-to-cart UX, image gallery, pricing & availability info                                   |
+|         **Cart**         | Redux-driven cart with quantity updates, removal, subtotal calculations, and persistence                        |
+|       **Checkout**       | Multi-field shipping/payment form with client-side validation, GraphQL order mutation, success/failure handling |
 
-## 🧩 What’s Implemented
-
-|          Page           |                              Features                              |
-|:-----------------------:|:-------------------------------------------------------------------|
-| **Login**               | Secure login w/ Redux + localStorage, field validation, toasts     |
-| **PLP (Product List)**  | SSR Product grid, clean cards, error loading, empty state, ready for pagination/search/filters |
-| **PDP (Product Detail)**| Variant selection client-side, server rendering, Add-to-Cart UX, gallery, stock info |
-| **Cart**                | Redux-driven, change qty/remove, subtotal, full persistence        |
-| **Checkout**            | Multi-field address/payment form, client validation, order via GraphQL, success/failure feedback |
-
-**+** All pages are mobile-ready and accessibility-checked.  
-**+** Architecture is extensible for future bonus features without global rewrites.
+> All pages are fully responsive and accessibility-audited, ensuring a seamless UX across devices and users.
 
 ## 💡 Senior Engineering Decisions
 
-- **Redux Toolkit for all persistent state:** guarantees debuggability, testability, and future scale.
-- **GraphQL via Apollo + modular hooks:** isolates API logic and makes UI/data coupling minimal.
-- **Server-side rendering for commerce-critical pages:** balanced SSR and CSR for best UX and SEO.
-- **Atomic, context-driven components:** reusable, easy to refactor, and each unit testable in isolation.
-- **Consistent, easily overridable UI primitives:** via Tailwind, ready for hand-off or theming.
+- **Redux Toolkit for All Persistent State:**  
+  Guarantees debuggability, testability, and future scalability in user session and cart state persistence.
+
+- **Apollo Client with Modular Hooks:**  
+  Isolates GraphQL logic for minimal coupling between UI and data layer.
+
+- **Balanced SSR & CSR Usage:**  
+  Server-side rendering for SEO-critical pages, combined with client-side interactions for responsiveness and UX polish.
+
+- **Atomic, Context-Driven Components:**  
+  Enhances maintainability and allows isolated testing and extensibility.
+
+- **Consistent & Overridable UI Components:**  
+  Developed atop Tailwind CSS for rapid theming and design adjustments.
 
 ## 🛠️ Getting Started
 
-**Prerequisites:**  
-- Node.js 18+  
-- Yarn or npm  
-- GraphQL API endpoint
+### Prerequisites
 
-**Installation & Setup:**
+- Node.js 18+
+- npm or yarn
+- Access to a compatible GraphQL API endpoint
+
+### Installation
 
 ```bash
-git clone https://github.com/idhavaltank/Crown-Jewels-Co.
-cd Crown-Jewels-Co.
+git clone https://github.com/idhavaltank/Crown-Jewels-Co.git
+cd Crown-Jewels-Co
 npm install
 # or
 yarn install
 ```
 
-**Environment Variables (`.env.local`):**
+### Environment Variables (`.env.local`)
+
 ```
-NEXT_PUBLIC_GRAPHQL_API_URL=https://your-api-endpoint/graphql
+NEXT_PUBLIC_GRAPHQL_API_URL=https://your-graphql-api-endpoint/graphql
 ```
 
-**Run Locally:**
+### Run the Development Server
+
 ```bash
 npm run dev
 # or
 yarn dev
 ```
-App at: [http://localhost:3000](http://localhost:3000)
 
-**Production Build:**
+Navigate to [http://localhost:3000](http://localhost:3000) to view the app.
+
+### Production Build & Start
+
 ```bash
 npm run build
 npm start
+# or
+yarn build
+yarn start
 ```
 
 ## 🧭 How to Use
 
-- Register or login via `/login`.
+- Register or login through `/login`.
 - Browse products at `/product`.
-- View product details and select options at `/product/[id]`.
-- Add items to cart; review cart at `/cart`.
-- Checkout securely at `/checkout`.
-- All feedback and errors appear as toast or inline—no disruptive alerts.
+- View product details and select variants at `/product/[id]`.
+- Add products to your cart; manage quantities and items in `/cart`.
+- Securely checkout with shipping and payment forms at `/checkout`.
+- Receive clear, accessible feedback through toasts and inline messages at every step.
 
-## 📈 What’s Next/Future Enhancements
+## 📈 Future Enhancements & Roadmap
 
-- Cross-tab sync for cart/auth via storage events
-- Pagination, infinite scroll, search & filters for PLP
-- Optimistic UI on order and cart
-- Advanced form validation, input masks, async address validation
-- End-to-end automated testing suite (Cypress/Playwright)
-- Server-driven SEO metadata via dynamic ``
+- Real-time cross-tab sync for auth and cart via localStorage events
+- Pagination, infinite scrolling, and advanced filters on product listing
+- Optimistic UI updates on cart and orders for enhanced responsiveness
+- Advanced checkout validation (input masks, async address verification)
+- End-to-end automated testing with Cypress or Playwright
+- Server-driven dynamic SEO metadata for all product and category pages
 
-> *This project embodies mature development, thoughtful design, and readiness for both rapid iteration and long-term evolution.*
+Thank you for visiting **Crown Jewels Co.!**  
+This project represents a mature, thoughtfully designed foundation ready for production-grade e-commerce applications. Your feedback and contributions are warmly welcome.
+
+_— Developed and maintained by an experienced team committed to engineering excellence and outstanding user experience_
+
+Feel free to customize or request enhancements tailored to your specific audience or preferences!
